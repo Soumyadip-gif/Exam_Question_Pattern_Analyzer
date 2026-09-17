@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Exam Question Pattern Analyzer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Exam Question Pattern Analyzer</h1>
+
+        <p>
+            Analyze previous years' question papers
+            and discover important exam patterns.
+        </p>
+
+
+        <!-- ========================= -->
+        <!-- FILE UPLOAD FORM -->
+        <!-- ========================= -->
+
+        <form
+            action="/upload"
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+            <input
+                type="file"
+                name="question_paper"
+                accept=".pdf,.jpg,.jpeg,.png"
+                required
+            >
+
+            <br><br>
+
+            <button type="submit">
+                Analyze Question Paper
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- MAIN JAVASCRIPT -->
+    <!-- ========================= -->
+
+    <script
+        src="{{ url_for('static', filename='js/script.js') }}">
+    </script>
+
+</body>
+
+</html>

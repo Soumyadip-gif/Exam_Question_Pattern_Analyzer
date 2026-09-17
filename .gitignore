@@ -1,0 +1,8 @@
+venv/
+uploads/
+__pycache__/
+*.pyc
+.env
+
+test_question_paper.pdf
+test_question_paper.png/

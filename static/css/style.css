@@ -1,0 +1,1665 @@
+/* =========================================================
+   EXAM QUESTION PATTERN ANALYZER
+   DARK AI / MYSTERIOUS THEME
+   ========================================================= */
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 35px;
+
+    min-height: 100vh;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: #e8e8f2;
+
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(
+            circle at 8% 10%,
+            rgba(255, 25, 70, 0.20),
+            transparent 24%
+        ),
+
+        radial-gradient(
+            circle at 92% 15%,
+            rgba(125, 40, 255, 0.22),
+            transparent 26%
+        ),
+
+        radial-gradient(
+            circle at 85% 90%,
+            rgba(255, 20, 80, 0.16),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 15% 85%,
+            rgba(75, 30, 180, 0.18),
+            transparent 25%
+        ),
+
+        linear-gradient(
+            135deg,
+            #050509,
+            #0b0b14 45%,
+            #08060d
+        );
+
+    background-size:
+        140% 140%,
+        140% 140%,
+        140% 140%,
+        140% 140%,
+        100% 100%;
+
+    animation:
+        backgroundPulse 14s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   DARK RED GLOW
+   ========================================================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    width: 380px;
+    height: 380px;
+
+    top: -150px;
+    left: -120px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 25, 65, 0.55),
+            rgba(150, 20, 60, 0.25) 42%,
+            transparent 72%
+        );
+
+    filter: blur(25px);
+
+    opacity: 0.85;
+
+    z-index: -2;
+
+    animation:
+        evilRedOrb 9s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   PURPLE GLOW
+   ========================================================= */
+
+body::after {
+    content: "";
+
+    position: fixed;
+
+    width: 430px;
+    height: 430px;
+
+    right: -160px;
+    bottom: -140px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(125, 35, 255, 0.55),
+            rgba(65, 20, 150, 0.25) 45%,
+            transparent 72%
+        );
+
+    filter: blur(28px);
+
+    opacity: 0.85;
+
+    z-index: -2;
+
+    animation:
+        evilPurpleOrb 11s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.container {
+    position: relative;
+
+    max-width: 1220px;
+
+    margin: 0 auto;
+
+    padding: 42px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(16, 16, 27, 0.94),
+            rgba(9, 9, 17, 0.91)
+        );
+
+    border:
+        1px solid rgba(255, 255, 255, 0.10);
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.65),
+
+        0 0 35px rgba(255, 20, 70, 0.08),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.06);
+
+    backdrop-filter: blur(18px);
+
+    -webkit-backdrop-filter: blur(18px);
+
+    animation:
+        containerEnter 0.9s ease-out,
+        containerDarkGlow 6s ease-in-out infinite;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   CONTAINER TOP ENERGY LINE
+   ========================================================= */
+
+.container::before {
+    content: "";
+
+    position: absolute;
+
+    top: -1px;
+
+    left: 8%;
+
+    width: 84%;
+
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ff174f,
+            #8a35ff,
+            #ff174f,
+            transparent
+        );
+
+    background-size: 250% auto;
+
+    border-radius: 50%;
+
+    filter:
+        blur(1px)
+        drop-shadow(
+            0 0 8px
+            rgba(255, 25, 70, 0.8)
+        );
+
+    animation:
+        energyLine 4s linear infinite;
+}
+
+
+/* =========================================================
+   SECOND INNER GLOW
+   ========================================================= */
+
+.container::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 22px;
+
+    pointer-events: none;
+
+    box-shadow:
+        inset 0 0 35px
+        rgba(105, 40, 255, 0.035),
+
+        inset 0 0 20px
+        rgba(255, 20, 60, 0.025);
+}
+
+
+/* =========================================================
+   MAIN TITLE
+   ========================================================= */
+
+h1 {
+    position: relative;
+
+    text-align: center;
+
+    margin:
+        5px
+        0
+        14px;
+
+    font-size:
+        clamp(
+            32px,
+            4vw,
+            52px
+        );
+
+    font-weight: 900;
+
+    letter-spacing: -1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #f2f2f5,
+            #ff315f,
+            #b84cff,
+            #ff315f,
+            #f2f2f5
+        );
+
+    background-size: 300% auto;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    text-shadow:
+        0 0 20px
+        rgba(255, 30, 80, 0.15);
+
+    animation:
+        titleEnter 1s ease-out,
+        titleGradient 5s ease-in-out infinite,
+        titleFloat 4s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   SUBTLE TITLE GLITCH
+   ========================================================= */
+
+h1:hover {
+    animation:
+        titleGlitch 0.35s steps(2),
+        titleGradient 5s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   HEADINGS
+   ========================================================= */
+
+h2 {
+    margin-top: 30px;
+
+    color: #f0eff8;
+
+    font-size: 24px;
+
+    text-shadow:
+        0 0 12px
+        rgba(160, 70, 255, 0.15);
+}
+
+
+h3 {
+    margin-bottom: 10px;
+
+    color: #deddeb;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.container > p {
+    font-size: 18px;
+
+    color: #9998ae;
+
+    line-height: 1.7;
+
+    animation:
+        descriptionEnter 1.2s ease-out;
+}
+
+
+/* =========================================================
+   HORIZONTAL LINE
+   ========================================================= */
+
+hr {
+    border: none;
+
+    height: 1px;
+
+    margin: 32px 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 35, 75, 0.35),
+            rgba(130, 45, 255, 0.35),
+            transparent
+        );
+}
+
+
+/* =========================================================
+   FILE UPLOAD
+   ========================================================= */
+
+input[type="file"] {
+    width: 100%;
+
+    padding: 13px;
+
+    border:
+        1px dashed
+        rgba(255, 45, 90, 0.45);
+
+    border-radius: 12px;
+
+    background:
+        rgba(5, 5, 12, 0.72);
+
+    color: #a7a6b8;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+
+input[type="file"]:hover {
+    transform:
+        translateY(-2px);
+
+    border-color:
+        #ff315f;
+
+    background:
+        rgba(12, 7, 18, 0.90);
+
+    box-shadow:
+        0 0 20px
+        rgba(255, 30, 80, 0.13);
+}
+
+
+input[type="file"]:focus {
+    outline: none;
+
+    border-color:
+        #b548ff;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(170, 60, 255, 0.12),
+
+        0 0 25px
+        rgba(170, 60, 255, 0.15);
+}
+
+
+/* =========================================================
+   FILE SELECT BUTTON
+   ========================================================= */
+
+input[type="file"]::file-selector-button {
+    border: none;
+
+    padding:
+        10px
+        18px;
+
+    margin-right: 12px;
+
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #171722,
+            #292035
+        );
+
+    color: #f4f3fa;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+
+input[type="file"]::file-selector-button:hover {
+    transform:
+        scale(1.05);
+
+    background:
+        linear-gradient(
+            135deg,
+            #2a1724,
+            #38205b
+        );
+
+    box-shadow:
+        0 0 15px
+        rgba(255, 35, 80, 0.18);
+}
+
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
+button {
+    position: relative;
+
+    overflow: hidden;
+
+    border: none;
+
+    padding:
+        13px
+        25px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            100deg,
+            #e7194d,
+            #9c2eea,
+            #5727c9
+        );
+
+    background-size:
+        220% auto;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.2px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 25px
+        rgba(205, 25, 85, 0.24),
+
+        0 0 18px
+        rgba(130, 40, 220, 0.12);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background-position 0.5s ease;
+}
+
+
+/* Button shine */
+
+button::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: -130%;
+
+    width: 70%;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.40),
+            transparent
+        );
+
+    transform:
+        skewX(-20deg);
+
+    transition:
+        left 0.65s ease;
+}
+
+
+button:hover {
+    transform:
+        translateY(-4px);
+
+    background-position:
+        100% center;
+
+    box-shadow:
+        0 14px 35px
+        rgba(220, 25, 80, 0.32),
+
+        0 0 25px
+        rgba(145, 45, 255, 0.25);
+}
+
+
+button:hover::before {
+    left: 140%;
+}
+
+
+button:active {
+    transform:
+        translateY(-1px)
+        scale(0.98);
+}
+
+
+/* =========================================================
+   LOADING BUTTON
+   ========================================================= */
+
+button.analyzing {
+    animation:
+        evilButtonPulse 1.1s
+        ease-in-out
+        infinite;
+}
+
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a {
+    text-decoration: none;
+
+    color: inherit;
+}
+
+
+/* =========================================================
+   QUESTION CARDS
+   ========================================================= */
+
+.question-card {
+    position: relative;
+
+    padding: 22px;
+
+    margin: 20px 0;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(20, 20, 31, 0.94),
+            rgba(11, 11, 19, 0.94)
+        );
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, 0.35);
+
+    animation:
+        questionCardEnter
+        0.7s
+        ease-out
+        both;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+.question-card:hover {
+    transform:
+        translateY(-5px);
+
+    border-color:
+        rgba(255, 40, 85, 0.35);
+
+    box-shadow:
+        0 14px 35px
+        rgba(0, 0, 0, 0.50),
+
+        0 0 20px
+        rgba(255, 30, 70, 0.07);
+}
+
+
+.question-card p {
+    line-height: 1.7;
+
+    color: #aaa9b9;
+}
+
+
+/* =========================================================
+   KEYWORDS
+   ========================================================= */
+
+.keyword {
+    display: inline-block;
+
+    padding:
+        6px
+        11px;
+
+    margin: 4px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 30, 80, 0.10),
+            rgba(140, 45, 255, 0.12)
+        );
+
+    border:
+        1px solid
+        rgba(255, 50, 100, 0.15);
+
+    color: #d3a9ff;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.keyword:hover {
+    transform:
+        translateY(-3px);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 30, 80, 0.18),
+            rgba(140, 45, 255, 0.20)
+        );
+
+    box-shadow:
+        0 0 15px
+        rgba(180, 45, 255, 0.12);
+}
+
+
+/* =========================================================
+   DETECTED TOPIC
+   ========================================================= */
+
+.topic {
+    display: inline-block;
+
+    padding:
+        7px
+        14px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e51e50,
+            #8e35dc
+        );
+
+    color: white;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 0 15px
+        rgba(225, 30, 80, 0.20);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.topic:hover {
+    transform:
+        scale(1.05);
+
+    box-shadow:
+        0 0 22px
+        rgba(225, 30, 80, 0.35);
+}
+
+
+/* =========================================================
+   TOPIC FREQUENCY DASHBOARD
+   ========================================================= */
+
+.topic-dashboard {
+    margin-top: 20px;
+
+    padding: 24px;
+
+    background:
+        rgba(12, 12, 21, 0.80);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 8px 30px
+        rgba(0, 0, 0, 0.28);
+}
+
+
+.topic-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 18px;
+}
+
+
+.topic-name {
+    width: 180px;
+
+    font-weight: 700;
+
+    color: #d7d5e3;
+}
+
+
+.topic-bar-container {
+    flex: 1;
+
+    height: 30px;
+
+    background:
+        rgba(255, 255, 255, 0.06);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+.topic-bar {
+    height: 100%;
+
+    min-width: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    padding-right: 12px;
+
+    color: white;
+
+    font-weight: 800;
+
+    background:
+        linear-gradient(
+            90deg,
+            #e51e50,
+            #b32ce8,
+            #6532db
+        );
+
+    background-size:
+        200% auto;
+
+    border-radius: 20px;
+
+    transition:
+        width
+        0.9s
+        cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        );
+
+    animation:
+        evilBarGlow
+        4s
+        ease-in-out
+        infinite;
+}
+
+
+.topic-count {
+    width: 120px;
+
+    color: #a9a7b9;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   PATTERN INSIGHTS
+   ========================================================= */
+
+.insights-dashboard {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(180px, 1fr)
+        );
+
+    gap: 18px;
+
+    margin-top: 20px;
+}
+
+
+.insight-card {
+    padding: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(22, 22, 34, 0.95),
+            rgba(10, 10, 18, 0.95)
+        );
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+    border-radius: 14px;
+
+    text-align: center;
+
+    opacity: 0;
+
+    animation:
+        insightCardEnter
+        0.6s
+        ease-out
+        forwards;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+.insight-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.insight-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.insight-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.insight-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.insight-card:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+
+.insight-card:hover {
+    transform:
+        translateY(-7px)
+        scale(1.02);
+
+    border-color:
+        rgba(255, 40, 85, 0.30);
+
+    box-shadow:
+        0 15px 35px
+        rgba(0, 0, 0, 0.40),
+
+        0 0 18px
+        rgba(150, 40, 230, 0.10);
+}
+
+
+.insight-card h3 {
+    margin-bottom: 12px;
+
+    color: #9f9daf;
+
+    font-size: 15px;
+}
+
+
+.insight-card p {
+    margin: 0;
+
+    font-size: 27px;
+
+    font-weight: 900;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff315f,
+            #b544ff
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    -webkit-text-fill-color:
+        transparent;
+}
+
+
+/* =========================================================
+   IMPORTANT TOPICS
+   ========================================================= */
+
+.important-topics {
+    margin-top: 20px;
+}
+
+
+.important-topic-card {
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    padding:
+        17px
+        21px;
+
+    margin-bottom: 12px;
+
+    background:
+        linear-gradient(
+            100deg,
+            rgba(20, 20, 31, 0.94),
+            rgba(10, 10, 18, 0.94)
+        );
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    border-radius: 12px;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+.important-topic-card:hover {
+    transform:
+        translateX(7px);
+
+    border-color:
+        rgba(255, 40, 85, 0.35);
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, 0.40),
+
+        -4px 0 18px
+        rgba(255, 25, 70, 0.08);
+}
+
+
+.important-topic-name {
+    font-weight: 800;
+
+    color: #dedcea;
+
+    font-size: 17px;
+}
+
+
+.important-topic-count {
+    padding:
+        6px
+        12px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255, 35, 80, 0.10);
+
+    color: #ff91aa;
+
+    font-weight: 700;
+
+    border:
+        1px solid
+        rgba(255, 35, 80, 0.15);
+}
+
+
+/* =========================================================
+   CHART
+   ========================================================= */
+
+.chart-container {
+    width: 100%;
+
+    max-width: 900px;
+
+    height: 450px;
+
+    margin:
+        25px
+        auto;
+
+    padding: 20px;
+
+    background:
+        rgba(10, 10, 18, 0.80);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 10px 35px
+        rgba(0, 0, 0, 0.35);
+
+    animation:
+        chartEnter
+        0.9s
+        ease-out;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes backgroundPulse {
+
+    0% {
+        background-position:
+            0% 0%,
+            100% 0%,
+            100% 100%,
+            0% 100%,
+            50% 50%;
+    }
+
+    50% {
+        background-position:
+            25% 20%,
+            75% 30%,
+            75% 80%,
+            20% 70%,
+            50% 50%;
+    }
+
+    100% {
+        background-position:
+            0% 0%,
+            100% 0%,
+            100% 100%,
+            0% 100%,
+            50% 50%;
+    }
+}
+
+
+@keyframes evilRedOrb {
+
+    0%,
+    100% {
+        transform:
+            translate(0, 0)
+            scale(1);
+
+        opacity: 0.65;
+    }
+
+    30% {
+        transform:
+            translate(100px, 55px)
+            scale(1.15);
+
+        opacity: 0.85;
+    }
+
+    60% {
+        transform:
+            translate(210px, 145px)
+            scale(0.90);
+
+        opacity: 0.55;
+    }
+
+    80% {
+        transform:
+            translate(80px, 220px)
+            scale(1.08);
+
+        opacity: 0.75;
+    }
+}
+
+
+@keyframes evilPurpleOrb {
+
+    0%,
+    100% {
+        transform:
+            translate(0, 0)
+            scale(1);
+
+        opacity: 0.65;
+    }
+
+    30% {
+        transform:
+            translate(-100px, -60px)
+            scale(1.12);
+
+        opacity: 0.85;
+    }
+
+    60% {
+        transform:
+            translate(-200px, -145px)
+            scale(0.92);
+
+        opacity: 0.55;
+    }
+
+    80% {
+        transform:
+            translate(-90px, -220px)
+            scale(1.08);
+
+        opacity: 0.75;
+    }
+}
+
+
+@keyframes containerEnter {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(35px)
+            scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes containerDarkGlow {
+
+    0%,
+    100% {
+        box-shadow:
+            0 25px 80px
+            rgba(0, 0, 0, 0.65),
+
+            0 0 30px
+            rgba(255, 20, 70, 0.06);
+    }
+
+    50% {
+        box-shadow:
+            0 25px 85px
+            rgba(0, 0, 0, 0.70),
+
+            0 0 45px
+            rgba(150, 35, 255, 0.12);
+    }
+}
+
+
+@keyframes energyLine {
+
+    0% {
+        background-position:
+            0% center;
+    }
+
+    100% {
+        background-position:
+            250% center;
+    }
+}
+
+
+@keyframes titleEnter {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(-30px)
+            scale(0.92);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes titleGradient {
+
+    0% {
+        background-position:
+            0% 50%;
+    }
+
+    50% {
+        background-position:
+            100% 50%;
+    }
+
+    100% {
+        background-position:
+            0% 50%;
+    }
+}
+
+
+@keyframes titleFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-4px);
+    }
+}
+
+
+@keyframes titleGlitch {
+
+    0% {
+        transform:
+            translate(0);
+    }
+
+    20% {
+        transform:
+            translate(-3px, 1px);
+    }
+
+    40% {
+        transform:
+            translate(3px, -1px);
+    }
+
+    60% {
+        transform:
+            translate(-2px, 0);
+    }
+
+    80% {
+        transform:
+            translate(2px, 1px);
+    }
+
+    100% {
+        transform:
+            translate(0);
+    }
+}
+
+
+@keyframes descriptionEnter {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+@keyframes questionCardEnter {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes insightCardEnter {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(30px)
+            scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes chartEnter {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes evilBarGlow {
+
+    0%,
+    100% {
+        background-position:
+            0% 50%;
+
+        box-shadow:
+            0 0 8px
+            rgba(255, 30, 80, 0.10);
+    }
+
+    50% {
+        background-position:
+            100% 50%;
+
+        box-shadow:
+            0 0 18px
+            rgba(190, 40, 255, 0.25);
+    }
+}
+
+
+@keyframes evilButtonPulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 8px 25px
+            rgba(205, 25, 85, 0.24),
+
+            0 0 18px
+            rgba(130, 40, 220, 0.12);
+    }
+
+    50% {
+        box-shadow:
+            0 8px 32px
+            rgba(235, 25, 80, 0.40),
+
+            0 0 30px
+            rgba(150, 40, 255, 0.25);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    body {
+        padding: 20px;
+    }
+
+    .container {
+        padding: 28px;
+
+        border-radius: 18px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    .topic-row {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 8px;
+    }
+
+    .topic-name {
+        width: auto;
+    }
+
+    .topic-count {
+        width: auto;
+    }
+
+    .chart-container {
+        height: 380px;
+
+        padding: 12px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .container {
+        padding: 20px;
+
+        border-radius: 15px;
+    }
+
+    h1 {
+        font-size: 29px;
+
+        letter-spacing: -0.5px;
+    }
+
+    .container > p {
+        font-size: 15px;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    input[type="file"] {
+        font-size: 13px;
+    }
+
+    .insights-dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .important-topic-card {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 10px;
+    }
+
+    .chart-container {
+        height: 320px;
+    }
+
+    body::before {
+        width: 230px;
+        height: 230px;
+    }
+
+    body::after {
+        width: 260px;
+        height: 260px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
+
+        scroll-behavior:
+            auto !important;
+    }
+}

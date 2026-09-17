@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Question Analysis</title>
+
+
+    <!-- ================================= -->
+    <!-- CHART.JS -->
+    <!-- ================================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
+
+    <!-- ================================= -->
+    <!-- MAIN CSS -->
+    <!-- ================================= -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- ================================= -->
+    <!-- PAGE TITLE -->
+    <!-- ================================= -->
+
+    <h1>Question Analysis</h1>
+
+
+    <p>
+        Total Questions:
+        <strong>{{ questions|length }}</strong>
+    </p>
+
+
+    <hr>
+
+
+    <!-- ================================= -->
+    <!-- QUESTION ANALYSIS -->
+    <!-- ================================= -->
+
+    {% for question in questions %}
+
+    <div class="question-card">
+
+        <h2>Question {{ loop.index }}</h2>
+
+
+        <p>
+
+            <strong>Question:</strong>
+
+            {{ question.original }}
+
+        </p>
+
+
+        <p>
+
+            <strong>Cleaned Text:</strong>
+
+            {{ question.cleaned }}
+
+        </p>
+
+
+        <p>
+
+            <strong>Keywords:</strong>
+
+
+            {% for keyword in question.keywords %}
+
+                <span class="keyword">
+                    {{ keyword }}
+                </span>
+
+            {% endfor %}
+
+        </p>
+
+
+        <p>
+
+            <strong>Detected Topic:</strong>
+
+
+            <span class="topic">
+
+                {{ question.topic }}
+
+            </span>
+
+        </p>
+
+
+    </div>
+
+    {% endfor %}
+
+
+
+    <!-- ================================= -->
+    <!-- SIMILAR / REPEATED QUESTIONS -->
+    <!-- ================================= -->
+
+    <hr>
+
+
+    <h2>🔄 Similar / Repeated Questions</h2>
+
+
+    {% if similar_questions %}
+
+        {% for item in similar_questions %}
+
+        <div class="question-card">
+
+
+            <h3>
+
+                Question {{ item.question1 }}
+
+                ↔
+
+                Question {{ item.question2 }}
+
+            </h3>
+
+
+            <p>
+
+                Similarity Score:
+
+                <strong>
+                    {{ item.score }}
+                </strong>
+
+            </p>
+
+
+        </div>
+
+        {% endfor %}
+
+
+    {% else %}
+
+        <p>
+            No highly similar questions were detected.
+        </p>
+
+    {% endif %}
+
+
+
+    <!-- ================================= -->
+    <!-- TOPIC FREQUENCY -->
+    <!-- ================================= -->
+
+    <hr>
+
+
+    <h2>📊 Topic Frequency Analysis</h2>
+
+
+    <div class="topic-dashboard">
+
+
+        {% if topic_frequency %}
+
+
+            {% for topic, count in topic_frequency.items() %}
+
+
+            <div class="topic-row">
+
+
+                <!-- Topic Name -->
+
+                <div class="topic-name">
+
+                    {{ topic }}
+
+                </div>
+
+
+
+                <!-- Topic Bar -->
+
+                <div class="topic-bar-container">
+
+
+                    <div
+                        class="topic-bar"
+                        data-count="{{ count }}"
+                    >
+
+                        {{ count }}
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- Question Count -->
+
+                <div class="topic-count">
+
+                    {{ count }}
+
+                    question{% if count != 1 %}s{% endif %}
+
+                </div>
+
+
+            </div>
+
+
+            {% endfor %}
+
+
+        {% else %}
+
+
+            <p>
+                No topic frequency data available.
+            </p>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+
+    <!-- ================================= -->
+    <!-- PATTERN INSIGHTS -->
+    <!-- ================================= -->
+
+    <hr>
+
+
+    <h2>📊 Pattern Insights</h2>
+
+
+    <div class="insights-dashboard">
+
+
+        <!-- Total Questions -->
+
+        <div class="insight-card">
+
+            <h3>
+                Total Questions
+            </h3>
+
+            <p>
+                {{ pattern_insights.total_questions }}
+            </p>
+
+        </div>
+
+
+
+        <!-- Most Asked Topic -->
+
+        <div class="insight-card">
+
+            <h3>
+                Most Asked Topic
+            </h3>
+
+            <p>
+                {{ pattern_insights.most_asked_topic }}
+            </p>
+
+        </div>
+
+
+
+        <!-- Top Topic Count -->
+
+        <div class="insight-card">
+
+            <h3>
+                Questions in Top Topic
+            </h3>
+
+            <p>
+                {{ pattern_insights.most_asked_topic_count }}
+            </p>
+
+        </div>
+
+
+
+        <!-- Topics Detected -->
+
+        <div class="insight-card">
+
+            <h3>
+                Topics Detected
+            </h3>
+
+            <p>
+                {{ pattern_insights.topics_detected }}
+            </p>
+
+        </div>
+
+
+
+        <!-- Repeated Questions -->
+
+        <div class="insight-card">
+
+            <h3>
+                Repeated Questions
+            </h3>
+
+            <p>
+                {{ pattern_insights.repeated_questions }}
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================================= -->
+    <!-- MOST IMPORTANT TOPICS -->
+    <!-- ================================= -->
+
+    <hr>
+
+
+    <h2>📌 Most Important Topics</h2>
+
+
+    <div class="important-topics">
+
+
+        {% if important_topics %}
+
+
+            {% for topic, count in important_topics %}
+
+
+            <div class="important-topic-card">
+
+
+                <div class="important-topic-name">
+
+                    {{ topic }}
+
+                </div>
+
+
+                <div class="important-topic-count">
+
+                    {{ count }}
+
+                    question{% if count != 1 %}s{% endif %}
+
+                </div>
+
+
+            </div>
+
+
+            {% endfor %}
+
+
+        {% else %}
+
+
+            <p>
+                No important topics detected.
+            </p>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+
+    <!-- ================================= -->
+    <!-- TOPIC DISTRIBUTION CHART -->
+    <!-- ================================= -->
+
+    <hr>
+
+
+    <h2>📈 Topic Distribution Chart</h2>
+
+
+    <div class="chart-container">
+
+
+        <canvas id="topicChart"></canvas>
+
+
+    </div>
+
+
+
+    <!-- ================================= -->
+    <!-- FLASK → JAVASCRIPT DATA -->
+    <!-- ================================= -->
+
+    <script id="topic-data" type="application/json">
+        {{ topic_frequency | tojson }}
+    </script>
+
+
+
+    <!-- ================================= -->
+    <!-- UPLOAD ANOTHER PAPER -->
+    <!-- ================================= -->
+
+    <br><br>
+
+
+    <a href="/">
+
+        <button>
+            Upload Another Question Paper
+        </button>
+
+    </a>
+
+
+</div>
+
+
+
+<!-- ================================= -->
+<!-- CHART + TOPIC BAR JAVASCRIPT -->
+<!-- ================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    // =================================
+    // TOPIC FREQUENCY BARS
+    // =================================
+
+    const topicBars =
+        document.querySelectorAll(".topic-bar");
+
+
+    if (topicBars.length > 0) {
+
+
+        let maxCount = 0;
+
+
+        topicBars.forEach(function (bar) {
+
+            const count =
+                parseInt(
+                    bar.dataset.count,
+                    10
+                );
+
+
+            if (!isNaN(count) && count > maxCount) {
+
+                maxCount = count;
+
+            }
+
+        });
+
+
+        topicBars.forEach(function (bar) {
+
+            const count =
+                parseInt(
+                    bar.dataset.count,
+                    10
+                );
+
+
+            if (maxCount > 0 && !isNaN(count)) {
+
+                const percentage =
+                    (count / maxCount) * 100;
+
+
+                bar.style.width =
+                    percentage + "%";
+
+            }
+
+        });
+
+    }
+
+
+
+    // =================================
+    // GET TOPIC DATA
+    // =================================
+
+    const topicDataElement =
+        document.getElementById(
+            "topic-data"
+        );
+
+
+    const chartCanvas =
+        document.getElementById(
+            "topicChart"
+        );
+
+
+    if (!topicDataElement || !chartCanvas) {
+
+        console.error(
+            "Topic chart elements not found."
+        );
+
+        return;
+
+    }
+
+
+
+    // =================================
+    // CHECK CHART.JS
+    // =================================
+
+    if (typeof Chart === "undefined") {
+
+        console.error(
+            "Chart.js was not loaded."
+        );
+
+        return;
+
+    }
+
+
+
+    // =================================
+    // READ FLASK DATA
+    // =================================
+
+    let topicData;
+
+
+    try {
+
+        topicData =
+            JSON.parse(
+                topicDataElement.textContent.trim()
+            );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Could not read topic data:",
+            error
+        );
+
+        return;
+
+    }
+
+
+
+    // =================================
+    // PREPARE CHART DATA
+    // =================================
+
+    const topics =
+        Object.keys(topicData);
+
+
+    const counts =
+        Object.values(topicData);
+
+
+
+    // =================================
+    // CHECK WHETHER DATA EXISTS
+    // =================================
+
+    if (topics.length === 0) {
+
+        console.log(
+            "No topic data available."
+        );
+
+        return;
+
+    }
+
+
+
+    // =================================
+    // CREATE CHART
+    // =================================
+
+    new Chart(
+        chartCanvas,
+        {
+
+            type: "bar",
+
+
+            data: {
+
+                labels: topics,
+
+
+                datasets: [
+
+                    {
+
+                        label:
+                            "Number of Questions",
+
+                        data: counts,
+
+                        borderWidth: 1
+
+                    }
+
+                ]
+
+            },
+
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+
+                plugins: {
+
+                    legend: {
+
+                        display: true
+
+                    },
+
+
+                    title: {
+
+                        display: true,
+
+                        text:
+                            "Questions by Topic"
+
+                    }
+
+                },
+
+
+                scales: {
+
+                    x: {
+
+                        ticks: {
+
+                            autoSkip: false
+
+                        }
+
+                    },
+
+
+                    y: {
+
+                        beginAtZero: true,
+
+
+                        ticks: {
+
+                            stepSize: 1
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    );
+
+});
+
+</script>
+
+
+</body>
+
+</html>
